@@ -1,409 +1,582 @@
 {
-  "name": "Wiremock UI",
-  "errorMessageDataPath": "error",
-  "baseUrl":"",
-  "pages": [
-    {
-      "default": true,
-      "name": "Stubs",	  
-      "id": "stubs",	  
-	  "server": "",
-      "description": "Wiremock hosted on ",	  
-      "methods": {
-        "getAll": {
-          "label": "Get Stubs",
-          "url": "/__admin/mappings",
-          "dataPath": "mappings", 
-          "display": {
-            "type": "table",
+    "name": "Wiremock MAV",
+    "errorMessageDataPath": "error",
+    "baseUrl": "http://localhost:8080",
+    "pages": [
+      {
+        "default": true,
+        "name": "List Stub",
+        "id": "stubs",
+        "server": "",
+        "description": "Wiremock hosted on ",
+        "methods": {
+          "delete": {
+            "url": "/__admin/mappings/:id"
+          },
+          "getAll": {
+            "label": "Get Stubs",
+            "url": "/__admin/mappings",
+            "dataPath": "mappings",
+            "queryParams": [],
+            "display": {
+              "type": "table",
+              "fields": [
+                {
+                  "name": "name",
+                  "type": "text",
+                  "label": "Name"
+                },
+                {
+                  "name": "method",
+                  "type": "text",
+                  "label": "Method",
+                  "dataPath": "request",
+                  "filterable": true
+                },
+                {
+                  "name": "priority",
+                  "type": "text",
+                  "label": "Priority"
+                },
+                {
+                  "name": "url",
+                  "type": "text",
+                  "label": "URL",
+                  "dataPath": "request",
+                  "filterable": true
+                },
+                {
+                  "name": "status",
+                  "type": "text",
+                  "label": "Status Code",
+                  "dataPath": "response",
+                  "filterable": true
+                },
+                {
+                  "name": "fixedDelayMilliseconds",
+                  "type": "text",
+                  "label": "Delay (ms)",
+                  "dataPath": "response"
+                }
+              ],
+              "sortBy": [
+                "name"
+              ]
+            }
+          },
+          "getSingle": {
+            "url": "/__admin/mappings/:id",
+            "dataPath": null,
+            "queryParams": [],
+            "requestHeaders": {}
+          },
+          "put": {
+            "url": "/__admin/mappings/:id",
+            "actualMethod": null,
             "fields": [
               {
                 "name": "name",
-                "type": "text",
-                "label": "Name"
+                "label": "Stub Name",
+                "type": "text"
+              },
+              {
+                "name": "urlPattern",
+                "label": "URL Pattern",
+                "type": "select",
+                "options": [
+                  {
+                    "displayText": "Path and query",
+                    "value": "url"
+                  },
+                  {
+                    "displayText": "Path and query regex",
+                    "value": "urlPattern"
+                  },
+                  {
+                    "displayText": "urlPathEqualTo",
+                    "value": "urlPath"
+                  },
+                  {
+                    "displayText": "Path regex",
+                    "value": "urlPathPattern"
+                  }
+                ]
               },
               {
                 "name": "method",
-                "type": "text",
                 "label": "Method",
-				"dataPath": "request"
-              },
-			  {
-                "name": "priority",
-                "type": "text",
-                "label": "Priority"				
+                "type": "select",
+                "options": [
+                  {
+                    "displayText": "GET",
+                    "value": "GET"
+                  },
+                  {
+                    "displayText": "POST",
+                    "value": "POST"
+                  },
+                  {
+                    "displayText": "PUT",
+                    "value": "PUT"
+                  },
+                  {
+                    "displayText": "DELETE",
+                    "value": "DELETE"
+                  }
+                ],
+                "dataPath": "request"
               },
               {
                 "name": "url",
-                "type": "text",
                 "label": "URL",
-				"dataPath": "request"
+                "type": "text"
+              },
+              {
+                "name": "queryParameters",
+                "label": "Query Parameters",
+                "type": "textarea",
+                "dataPath": "request",
+                "placeholder": "{\"Accept\" : { \"contains\" : \"json\"}}",
+                "dataType": "json"
+              },
+              {
+                "name": "bodyPatterns",
+                "label": "Body Patterns",
+                "type": "textarea",
+                "dataPath": "request",
+                "placeholder": "[ {\"matchesXPath\" : \"/todo-list[count(todo-item) = 3]\"} ]",
+                "dataType": "json"
+              },
+              {
+                "name": "priority",
+                "label": "Priority",
+                "type": "text"
+              },
+              {
+                "type": "hr"
               },
               {
                 "name": "status",
+                "label": "Response Status Code",
                 "type": "text",
-                "label": "Status Code",
-				"dataPath": "response"
-              },
-              {
-                "name": "fixedDelayMilliseconds",
-                "type": "text",
-                "label": "Delay (ms)",
                 "dataPath": "response"
-              }
-            ],
-			"sortBy": ["name"]
-          }
-        },
-        "getSingle": {
-          "url": "/__admin/mappings/:id",
-          "dataPath": null,
-          "queryParams": [],
-          "requestHeaders": {}
-        },
-        "put": {
-          "url": "/__admin/mappings/:id",
-          "actualMethod": null,
-          "fields": [
-            {
-              "name": "name",
-              "label": "Stub Name",
-              "type": "text"
-            },
-			{
-              "name": "urlPattern",
-              "label": "URL Pattern",
-              "type": "select",
-			  "options": [{"displayText":"Path and query","value":"url"}, {"displayText":"Path and query regex","value":"urlPattern"}, {"displayText":"urlPathEqualTo","value":"urlPath"}, {"displayText":"Path regex","value":"urlPathPattern"}]
-            },
-			{
-              "name": "method",
-              "label": "Method",
-              "type": "select",
-			  "options": [{"displayText":"GET","value":"GET"},{"displayText":"POST","value":"POST"},{"displayText":"PUT","value":"PUT"},{"displayText":"DELETE","value":"DELETE"}],
-			  "dataPath": "request"
-            },
-			{
-              "name": "url",
-              "label": "URL",
-              "type": "text"
-            },
-			{
-              "name": "queryParameters",
-              "label": "Query Parameters",
-              "type": "textarea",
-			  "dataPath": "request",
-			  "placeholder": "{\"Accept\" : { \"contains\" : \"json\"}}",
-			  "dataType":"json"
-            },
-			{
-              "name": "bodyPatterns",
-              "label": "Body Patterns",
-              "type": "textarea",
-			  "dataPath": "request",
-			  "placeholder": "[ {\"matchesXPath\" : \"/todo-list[count(todo-item) = 3]\"} ]",
-			  "dataType":"json"
-            },
-			{
-              "name": "priority",
-              "label": "Priority",
-              "type": "text"
-            },
-            {              
-              "type": "hr"
-            },
-            {
-              "name": "status",
-              "label": "Response Status Code",
-              "type": "text",
-			  "dataPath": "response"
-            },
-			{
-              "name": "fault",
-              "label": "Fault",
-              "type": "select",
-			  "options": [{"displayText":"No fault","value":"NONE"},{"displayText":"Close socket with no response","value":"EMPTY_RESPONSE"},{"displayText":"Send bad HTTP data then close socket","value":"RANDOM_DATA_THEN_CLOSE"},{"displayText":"Send 200 response then bad HTTP data, then close socket","value":"MALFORMED_RESPONSE_CHUNK"},{"displayText":"Peer connection reset","value":"CONNECTION_RESET_BY_PEER"}],
-			  "dataPath": "response"
-            },
-			{
-              "name": "delayType",
-              "label": "Delay Type",
-              "type": "select",
-			  "options": [{"displayText":"No delay","value":"NONE"},{"displayText":"Fixed delay","value":"fixedDelayMilliseconds"}],
-			  "dataPath": "response"
-            },
-            {
-              "name": "delay",
-              "label": "Delay (ms)",
-              "type": "text",
-			  "dataPath": "response"
-            },			
-            {
-              "name": "body",
-              "label": "Response",
-              "type": "textarea",
-			  "dataPath": "response",
-			  "placeholder" :"Response payload"
-            },			
-            {
-              "name": "headers",
-              "label": "Response Header",
-              "type": "textarea",			  
-			  "dataPath": "response",
-			  "placeholder" :"{\"Content-Type\":\"application\/json\"}",
-			  "dataType":"json"
-            },
-            {              
-              "type": "hr"
-            },			
-            {
-              "name": "transformers",
-              "label": "Transformers",
-              "type": "textarea",			  
-			  "dataPath": "response",
-			  "placeholder" :"[\"http-request-maker\"]",
-			  "dataType":"json"
-			  
-            },
-            {
-              "name": "url",
-              "label": "Async URL",
-              "type": "text",
-			  "dataPath": "response.transformerParameters.http_request_maker"
-            },
-            {
-              "name": "delay",
-              "label": "Async delay",
-              "type": "text",
-			  "dataPath": "response.transformerParameters.http_request_maker"
-            },
-			{
-              "name": "method",
-              "label": "Async Method",
-              "type": "select",
-			  "options": [{"displayText":"GET","value":"GET"},{"displayText":"POST","value":"POST"},{"displayText":"PUT","value":"PUT"},{"displayText":"DELETE","value":"DELETE"}],
-			  "dataPath": "response.transformerParameters.http_request_maker"
-            },			
-            {
-              "name": "headers",
-              "label": "Async Response Header",
-              "type": "textarea",			  
-			  "dataPath": "response.transformerParameters.http_request_maker",
-			  "placeholder" :"{\"Content-Type\":\"application\/json\"}",
-			  "dataType":"json"
-            },			
-            {
-              "name": "body",
-              "label": "Async Response",
-              "type": "textarea",
-			  "dataPath": "response.transformerParameters.http_request_maker",
-			  "placeholder" :"Response payload"
-            }
-          ]
-        },
-        "post": {
-          "url": "/__admin/mappings",
-          "fields": [
-            {
-              "name": "name",
-              "label": "Stub Name",
-              "type": "text"
-            },
-			{
-              "name": "urlPattern",
-              "label": "URL Pattern",
-              "type": "select",
-			  "options": [{"displayText":"Path and query","value":"url"}, {"displayText":"Path and query regex","value":"urlPattern"}, {"displayText":"urlPathEqualTo","value":"urlPath"}, {"displayText":"Path regex","value":"urlPathPattern"}]
-            },
-			{
-              "name": "method",
-              "label": "Method",
-              "type": "select",
-			  "options": [{"displayText":"GET","value":"GET"},{"displayText":"POST","value":"POST"},{"displayText":"PUT","value":"PUT"},{"displayText":"DELETE","value":"DELETE"}],
-			  "dataPath": "request"
-            },
-			{
-              "name": "url",
-              "label": "URL",
-              "type": "text"
-            },
-			{
-              "name": "queryParameters",
-              "label": "Query Parameters",
-              "type": "textarea",
-			  "dataPath": "request",
-			  "placeholder": "{\"Accept\" : { \"contains\" : \"json\"}}",
-			  "dataType":"json"
-            },
-			{
-              "name": "bodyPatterns",
-              "label": "Body Patterns",
-              "type": "textarea",
-			  "dataPath": "request",
-			  "placeholder": "[ {\"matchesXPath\" : \"/todo-list[count(todo-item) = 3]\"} ]",
-			  "dataType":"json"
-            },
-			{
-              "name": "priority",
-              "label": "Priority",
-              "type": "text"
-            },
-            {              
-              "type": "hr"
-            },
-            {
-              "name": "status",
-              "label": "Response Status Code",
-              "type": "text",
-			  "dataPath": "response"
-            },
-			{
-              "name": "fault",
-              "label": "Fault",
-              "type": "select",
-			  "options": [{"displayText":"No fault","value":"NONE"},{"displayText":"Close socket with no response","value":"EMPTY_RESPONSE"},{"displayText":"Send bad HTTP data then close socket","value":"RANDOM_DATA_THEN_CLOSE"},{"displayText":"Send 200 response then bad HTTP data, then close socket","value":"MALFORMED_RESPONSE_CHUNK"},{"displayText":"Peer connection reset","value":"CONNECTION_RESET_BY_PEER"}],
-			  "dataPath": "response"
-            },
-			{
-              "name": "delayType",
-              "label": "Delay Type",
-              "type": "select",
-			  "options": [{"displayText":"No delay","value":"NONE"},{"displayText":"Fixed delay","value":"fixedDelayMilliseconds"}],
-			  "dataPath": "response"
-            },
-            {
-              "name": "delay",
-              "label": "Delay (ms)",
-              "type": "text",
-			  "dataPath": "response"
-            },			
-            {
-              "name": "body",
-              "label": "Response",
-              "type": "textarea",
-			  "dataPath": "response",
-			  "placeholder" :"Response"
-            },						
-            {
-              "name": "headers",
-              "label": "Response Header",
-              "type": "textarea",			  
-			  "dataPath": "response",
-			  "placeholder" :"{\"Content-Type\":\"application\/json\"}",
-			  "dataType":"json"
-            },
-            {              
-              "type": "hr"
-            },			
-            {
-              "name": "transformers",
-              "label": "Transformers",
-              "type": "textarea",			  
-			  "dataPath": "response",
-			  "placeholder" :"[\"http-request-maker\"]",
-			  "dataType":"json"
-            },
-            {
-              "name": "url",
-              "label": "Async URL",
-              "type": "text",
-			  "dataPath": "response.transformerParameters.http_request_maker"
-            },
-            {
-              "name": "delay",
-              "label": "Async delay",
-              "type": "text",
-			  "dataPath": "response.transformerParameters.http_request_maker"
-            },
-			{
-              "name": "method",
-              "label": "Async Method",
-              "type": "select",
-			  "options": [{"displayText":"GET","value":"GET"},{"displayText":"POST","value":"POST"},{"displayText":"PUT","value":"PUT"},{"displayText":"DELETE","value":"DELETE"}],
-			  "dataPath": "response.transformerParameters.http_request_maker"
-            },			
-            {
-              "name": "headers",
-              "label": "Async Response Header",
-              "type": "textarea",			  
-			  "dataPath": "response.transformerParameters.http_request_maker",
-			  "placeholder" :"{\"Content-Type\":\"application\/json\"}",
-			  "dataType":"json"
-            },			
-            {
-              "name": "body",
-              "label": "Async Response",
-              "type": "textarea",
-			  "dataPath": "response.transformerParameters.http_request_maker",
-			  "placeholder" :"Response payload"
-            }
-          ]
-        },
-        "delete": {
-          "url": "/__admin/mappings/:id"
-        }
-      }
-    },
-	{
-      "default": true,
-      "name": "Request History",	  
-      "id": "request",
-      "description": "Request History",
-      "methods": {
-        "getAll": {
-          "label": "Get Stubs",
-          "url": "/__admin/requests",
-          "dataPath": "requests",
-          "queryParams": [],
-          "display": {
-            "type": "table",
-            "fields": [	
-			  {
-                "name": "loggedDateString",
-                "type": "text",
-                "label": "Date Time",
-				"dataPath": "request"
-              },			
-			  {
-                "name": "name",
-                "type": "text",
-                "label": "Stub Name",
-				"dataPath": "stubMapping"
               },
               {
-                "name": "absoluteUrl",
-                "type": "text",
-                "label": "URL",
-				"dataPath": "request"
+                "name": "fault",
+                "label": "Fault",
+                "type": "select",
+                "options": [
+                  {
+                    "displayText": "No fault",
+                    "value": "NONE"
+                  },
+                  {
+                    "displayText": "Close socket with no response",
+                    "value": "EMPTY_RESPONSE"
+                  },
+                  {
+                    "displayText": "Send bad HTTP data then close socket",
+                    "value": "RANDOM_DATA_THEN_CLOSE"
+                  },
+                  {
+                    "displayText": "Send 200 response then bad HTTP data, then close socket",
+                    "value": "MALFORMED_RESPONSE_CHUNK"
+                  },
+                  {
+                    "displayText": "Peer connection reset",
+                    "value": "CONNECTION_RESET_BY_PEER"
+                  }
+                ],
+                "dataPath": "response"
               },
-			  {
+              {
+                "name": "delayType",
+                "label": "Delay Type",
+                "type": "select",
+                "options": [
+                  {
+                    "displayText": "No delay",
+                    "value": "NONE"
+                  },
+                  {
+                    "displayText": "Fixed delay",
+                    "value": "fixedDelayMilliseconds"
+                  }
+                ],
+                "dataPath": "response"
+              },
+              {
+                "name": "delay",
+                "label": "Delay (ms)",
+                "type": "text",
+                "dataPath": "response"
+              },
+              {
+                "name": "body",
+                "label": "Response",
+                "type": "textarea",
+                "dataPath": "response",
+                "placeholder": "Response payload"
+              },
+              {
+                "name": "headers",
+                "label": "Response Header",
+                "type": "textarea",
+                "dataPath": "response",
+                "placeholder": "{\"Content-Type\":\"application\/json\"}",
+                "dataType": "json"
+              },
+              {
+                "type": "hr"
+              },
+              {
+                "name": "transformers",
+                "label": "Transformers",
+                "type": "textarea",
+                "dataPath": "response",
+                "placeholder": "[\"http-request-maker\"]",
+                "dataType": "json"
+              },
+              {
+                "name": "url",
+                "label": "Async URL",
+                "type": "text",
+                "dataPath": "response.transformerParameters.http_request_maker"
+              },
+              {
+                "name": "delay",
+                "label": "Async delay",
+                "type": "text",
+                "dataPath": "response.transformerParameters.http_request_maker"
+              },
+              {
                 "name": "method",
-                "type": "text",
+                "label": "Async Method",
+                "type": "select",
+                "options": [
+                  {
+                    "displayText": "GET",
+                    "value": "GET"
+                  },
+                  {
+                    "displayText": "POST",
+                    "value": "POST"
+                  },
+                  {
+                    "displayText": "PUT",
+                    "value": "PUT"
+                  },
+                  {
+                    "displayText": "DELETE",
+                    "value": "DELETE"
+                  }
+                ],
+                "dataPath": "response.transformerParameters.http_request_maker"
+              },
+              {
+                "name": "headers",
+                "label": "Async Response Header",
+                "type": "textarea",
+                "dataPath": "response.transformerParameters.http_request_maker",
+                "placeholder": "{\"Content-Type\":\"application\/json\"}",
+                "dataType": "json"
+              },
+              {
+                "name": "body",
+                "label": "Async Response",
+                "type": "textarea",
+                "dataPath": "response.transformerParameters.http_request_maker",
+                "placeholder": "Response payload"
+              }
+            ]
+          },
+          "post": {
+            "url": "/__admin/mappings",
+            "fields": [
+              {
+                "name": "name",
+                "label": "Stub Name",
+                "type": "text"
+              },
+              {
+                "name": "urlPattern",
+                "label": "URL Pattern",
+                "type": "select",
+                "options": [
+                  {
+                    "displayText": "Path and query",
+                    "value": "url"
+                  },
+                  {
+                    "displayText": "Path and query regex",
+                    "value": "urlPattern"
+                  },
+                  {
+                    "displayText": "urlPathEqualTo",
+                    "value": "urlPath"
+                  },
+                  {
+                    "displayText": "Path regex",
+                    "value": "urlPathPattern"
+                  }
+                ]
+              },
+              {
+                "name": "method",
                 "label": "Method",
-				"dataPath": "request"
+                "type": "select",
+                "options": [
+                  {
+                    "displayText": "GET",
+                    "value": "GET"
+                  },
+                  {
+                    "displayText": "POST",
+                    "value": "POST"
+                  },
+                  {
+                    "displayText": "PUT",
+                    "value": "PUT"
+                  },
+                  {
+                    "displayText": "DELETE",
+                    "value": "DELETE"
+                  }
+                ],
+                "dataPath": "request"
               },
-			  {
-                "name": "body",
-                "type": "text",
-                "label": "Request Body",
-				"dataPath": "request"
+              {
+                "name": "url",
+                "label": "URL",
+                "type": "text"
               },
-			  {
+              {
+                "name": "queryParameters",
+                "label": "Query Parameters",
+                "type": "textarea",
+                "dataPath": "request",
+                "placeholder": "{\"Accept\" : { \"contains\" : \"json\"}}",
+                "dataType": "json"
+              },
+              {
+                "name": "bodyPatterns",
+                "label": "Body Patterns",
+                "type": "textarea",
+                "dataPath": "request",
+                "placeholder": "[ {\"matchesXPath\" : \"/todo-list[count(todo-item) = 3]\"} ]",
+                "dataType": "json"
+              },
+              {
+                "name": "priority",
+                "label": "Priority",
+                "type": "text"
+              },
+              {
+                "type": "hr"
+              },
+              {
                 "name": "status",
+                "label": "Response Status Code",
                 "type": "text",
-                "label": "Status Code",
-				"dataPath": "response"
+                "dataPath": "response"
               },
-			  {
-                "name": "body",
+              {
+                "name": "fault",
+                "label": "Fault",
+                "type": "select",
+                "options": [
+                  {
+                    "displayText": "No fault",
+                    "value": "NONE"
+                  },
+                  {
+                    "displayText": "Close socket with no response",
+                    "value": "EMPTY_RESPONSE"
+                  },
+                  {
+                    "displayText": "Send bad HTTP data then close socket",
+                    "value": "RANDOM_DATA_THEN_CLOSE"
+                  },
+                  {
+                    "displayText": "Send 200 response then bad HTTP data, then close socket",
+                    "value": "MALFORMED_RESPONSE_CHUNK"
+                  },
+                  {
+                    "displayText": "Peer connection reset",
+                    "value": "CONNECTION_RESET_BY_PEER"
+                  }
+                ],
+                "dataPath": "response"
+              },
+              {
+                "name": "delayType",
+                "label": "Delay Type",
+                "type": "select",
+                "options": [
+                  {
+                    "displayText": "No delay",
+                    "value": "NONE"
+                  },
+                  {
+                    "displayText": "Fixed delay",
+                    "value": "fixedDelayMilliseconds"
+                  }
+                ],
+                "dataPath": "response"
+              },
+              {
+                "name": "delay",
+                "label": "Delay (ms)",
                 "type": "text",
-                "label": "Response Body",
-				"dataPath": "response"
+                "dataPath": "response"
+              },
+              {
+                "name": "body",
+                "label": "Response",
+                "type": "textarea",
+                "dataPath": "response",
+                "placeholder": "Response"
+              },
+              {
+                "name": "headers",
+                "label": "Response Header",
+                "type": "textarea",
+                "dataPath": "response",
+                "placeholder": "{\"Content-Type\":\"application\/json\"}",
+                "dataType": "json"
+              },
+              {
+                "type": "hr"
+              },
+              {
+                "name": "transformers",
+                "label": "Transformers",
+                "type": "textarea",
+                "dataPath": "response",
+                "placeholder": "[\"http-request-maker\"]",
+                "dataType": "json"
+              },
+              {
+                "name": "url",
+                "label": "Async URL",
+                "type": "text",
+                "dataPath": "response.transformerParameters.http_request_maker"
+              },
+              {
+                "name": "delay",
+                "label": "Async delay",
+                "type": "text",
+                "dataPath": "response.transformerParameters.http_request_maker"
+              },
+              {
+                "name": "method",
+                "label": "Async Method",
+                "type": "select",
+                "options": [
+                  {
+                    "displayText": "GET",
+                    "value": "GET"
+                  },
+                  {
+                    "displayText": "POST",
+                    "value": "POST"
+                  },
+                  {
+                    "displayText": "PUT",
+                    "value": "PUT"
+                  },
+                  {
+                    "displayText": "DELETE",
+                    "value": "DELETE"
+                  }
+                ],
+                "dataPath": "response.transformerParameters.http_request_maker"
+              },
+              {
+                "name": "headers",
+                "label": "Async Response Header",
+                "type": "textarea",
+                "dataPath": "response.transformerParameters.http_request_maker",
+                "placeholder": "{\"Content-Type\":\"application\/json\"}",
+                "dataType": "json"
+              },
+              {
+                "name": "body",
+                "label": "Async Response",
+                "type": "textarea",
+                "dataPath": "response.transformerParameters.http_request_maker",
+                "placeholder": "Response payload"
               }
             ]
           }
         }
+      },
+      {
+        "default": true,
+        "name": "Request History",
+        "id": "request",
+        "description": "Request History",
+        "methods": {
+          "delete": {
+            "url": "/__admin/requests/:id"
+          },
+          "getAll": {
+            "label": "Get Stubs",
+            "url": "/__admin/requests",
+            "dataPath": "requests",
+            "queryParams": [],
+            "display": {
+              "type": "table",
+              "fields": [
+                {
+                  "name": "loggedDateString",
+                  "type": "text",
+                  "label": "Date Time",
+                  "dataPath": "request",
+                  "filterable": true
+                },
+                {
+                  "name": "name",
+                  "type": "text",
+                  "label": "Stub Name",
+                  "dataPath": "stubMapping"
+                },
+                {
+                  "name": "absoluteUrl",
+                  "type": "text",
+                  "label": "URL",
+                  "dataPath": "request",
+                  "filterable": true
+                },
+                {
+                  "name": "method",
+                  "type": "text",
+                  "label": "Method",
+                  "dataPath": "request",
+                  "filterable": true
+                },
+                {
+                  "name": "body",
+                  "type": "text",
+                  "label": "Request Body",
+                  "dataPath": "request"
+                },
+                {
+                  "name": "status",
+                  "type": "text",
+                  "label": "Status Code",
+                  "dataPath": "response"
+                },
+                {
+                  "name": "body",
+                  "type": "text",
+                  "label": "Response Body",
+                  "dataPath": "response"
+                }
+              ]
+            }
+          }
+        }
       }
-    }	
-  ]
-}
+    ]
+  }

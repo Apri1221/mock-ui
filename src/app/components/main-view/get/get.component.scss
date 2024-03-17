@@ -23,6 +23,7 @@
 .pure-table {
   min-width: 100%;
   background: #fff;
+  border: none !important;
 
   .pure-button {
     margin: 0 5px;
@@ -78,8 +79,22 @@
   font-size: 125%;
 }
 
+.shadow-custom-xl {
+  box-shadow: 0px 11px 32px -3px rgba(0,0,0,0.1);
+}
+
+.pure-button.button-primary {
+  background: #D2E0FB;
+  box-shadow: 0px 3px 8px -3px rgba(0,0,0,0.1);
+}
+
 .pure-button.button-success {
   background: #1cb841;
+}
+
+.button-danger {
+  color: white;
+  background: #FF6969;
 }
 
 .pure-button.button-success, .pure-button.button-error, .pure-button.button-warning, .pure-button.button-secondary {

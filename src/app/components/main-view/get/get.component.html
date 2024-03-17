@@ -4,7 +4,7 @@
 	<a (click)="onClickChangeURL()"><u>Click here to change url</u></a> 
   </div>
   <div class="create pure-u-1-2">
-    <button class="pure-button button-success button-xlarge" *ngIf="pageData && pageData.methods && pageData.methods.post" (click)="onClickNew()">+ Add Item</button>
+    <button class="pure-button pure-button-primary button-xlarge" *ngIf="pageData && pageData.methods && pageData.methods.post" (click)="onClickNew()">+ Add Item</button>
   </div>
 </div>
 
@@ -31,7 +31,9 @@
     </fieldset>
   </form>
 
-  <table class="pure-table pure-table-horizontal">
+  <div [ngStyle] = "{ display: 'block', overflow: 'auto' }">
+    
+  <table class="pure-table pure-table-horizontal shadow-custom-xl">
     <thead>
     <tr>
       <th *ngFor="let field of fields">{{field.label || field.name}}</th>
@@ -64,13 +66,13 @@
       </td>
       <td *ngIf="showActions()" [ngStyle]="{textAlign: 'center'}" style="width: 20%" >
         <div class="pure-button-group">
-          <button class="pure-button" [ngClass]="{hide: !pageData.methods.put}" (click)="onClickEdit(row)">
+          <button class="pure-button button-primary" [ngClass]="{hide: !pageData.methods.put}" (click)="onClickEdit(row)">
             <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
           </button>
-		  <button class="pure-button" (click)="clone(row)">
+		      <button class="pure-button button-primary" [ngClass]="{hide: !pageData.methods.put}" (click)="clone(row)">
             <i class="fa fa-clone" aria-hidden="true"></i>
           </button>
-          <button class="pure-button" [ngClass]="{hide: !pageData.methods.delete}" (click)="delete(row)" hidden>
+          <button class="pure-button" [ngClass]="{hide: !pageData.methods.delete}" class="pure-button button-danger" (click)="delete(row)">
             <i class="fa fa-times" aria-hidden="true"></i>
           </button>
         </div>
@@ -78,5 +80,6 @@
     </tr>
     </tbody>
   </table>
+</div>
 
 </div>
