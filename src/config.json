@@ -85,19 +85,19 @@
               "type": "select",
               "options": [
                 {
-                  "displayText": "Path and query",
+                  "displayText": "Path and query [url]",
                   "value": "url"
                 },
                 {
-                  "displayText": "Path and query regex",
+                  "displayText": "Path and query regex [urlPattern]",
                   "value": "urlPattern"
                 },
                 {
-                  "displayText": "urlPathEqualTo",
+                  "displayText": "urlPathEqualTo [urlPath]",
                   "value": "urlPath"
                 },
                 {
-                  "displayText": "Path regex",
+                  "displayText": "Path regex [urlPathPattern]",
                   "value": "urlPathPattern"
                 }
               ]
@@ -227,15 +227,32 @@
               "dataType": "json"
             },
             {
-              "type": "hr"
-            },
-            {
               "name": "transformers",
               "label": "Transformers",
-              "type": "textarea",
+              "type": "select",
               "dataPath": "response",
-              "placeholder": "[\"http-request-maker\"]",
-              "dataType": "json"
+              "dataType": "json",
+              "options": [
+                {
+                  "displayText": "None",
+                  "value": "[]"
+                },
+                {
+                  "displayText": "HTTP Request Maker",
+                  "value": "[\"http-request-maker\"]"
+                },
+                {
+                  "displayText": "Response Template",
+                  "value": "[\"response-template\"]"
+                },
+                {
+                  "displayText": "Modify Response Header",
+                  "value": "[\"modify-response-header\"]"
+                }
+              ]
+            },
+            {
+              "type": "hr"
             },
             {
               "name": "url",
@@ -446,15 +463,32 @@
               "dataType": "json"
             },
             {
-              "type": "hr"
-            },
-            {
               "name": "transformers",
               "label": "Transformers",
-              "type": "textarea",
+              "type": "select",
               "dataPath": "response",
-              "placeholder": "[\"http-request-maker\"]",
-              "dataType": "json"
+              "dataType": "json",
+              "options": [
+                {
+                  "displayText": "None",
+                  "value": "[]"
+                },
+                {
+                  "displayText": "HTTP Request Maker",
+                  "value": "[\"http-request-maker\"]"
+                },
+                {
+                  "displayText": "Response Template",
+                  "value": "[\"response-template\"]"
+                },
+                {
+                  "displayText": "Modify Response Header",
+                  "value": "[\"modify-response-header\"]"
+                }
+              ]
+            },
+            {
+              "type": "hr"
             },
             {
               "name": "url",
