@@ -2,13 +2,14 @@
 
 Standalone Wiremock client to create, update, delete, clone wiremock stubs.
 
+Docs: https://wiremock.org/docs/standalone/admin-api-reference/
+
 # How to use
 
 <ul>
-  <li>Go to https://aumohanraj.github.io/wiremock-ui/index.html</li>
-  <li>Search for hyperlink "Click here to change url" and click</li>
-  <li>Set your wiremock url. Example : http://localhost:8080</li>
-  <li>That's it. You are ready to use client</li>
+  <li>I do npm install -s rxjs-compat</li>
+  <li>npm install -g npm-check-updates</li>
+  <li>yarn start</li>
 </ul>
 
 # How to customize or build this project
