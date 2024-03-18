@@ -1,7 +1,7 @@
-import {Component, OnInit, Input, Inject, Output, EventEmitter} from '@angular/core';
-import {FormGroup, FormControl, FormBuilder} from '@angular/forms';
-import {DataPathUtils} from '../../../utils/dataPath.utils';
-import {MultipartFormUtils} from '../../../utils/multipartForm.utils';
+import { Component, OnInit, Input, Inject, Output, EventEmitter } from '@angular/core';
+import { FormGroup, FormControl, FormBuilder } from '@angular/forms';
+import { DataPathUtils } from '../../../utils/dataPath.utils';
+import { MultipartFormUtils } from '../../../utils/multipartForm.utils';
 import { ToastrService } from 'ngx-toastr';
 import { trigger, state, style, animate, transition } from '@angular/animations';
 import { RequestHeaders } from '../../../services/config.model';
@@ -23,7 +23,7 @@ import { environment } from '../../../../environments/environment';
     ])
   ]
 })
-export class PutComponent implements OnInit  {
+export class PutComponent implements OnInit {
   @Input() closable = true;
 
   @Input() visible: boolean;
@@ -47,11 +47,11 @@ export class PutComponent implements OnInit  {
   workingRowData: any;
 
   constructor(@Inject('RequestsService') private requestsService,
-              @Inject('DataPathUtils') private dataPathUtils,
-              @Inject('MultipartFormUtils') private multipartFormUtils,
-              @Inject('UrlUtils') private urlUtils,
-              private toastrService: ToastrService,
-              private _fb: FormBuilder) { }
+    @Inject('DataPathUtils') private dataPathUtils,
+    @Inject('MultipartFormUtils') private multipartFormUtils,
+    @Inject('UrlUtils') private urlUtils,
+    private toastrService: ToastrService,
+    private _fb: FormBuilder) { }
 
   ngOnInit() {
     this.initForm();
@@ -84,7 +84,7 @@ export class PutComponent implements OnInit  {
       if (field.type === 'object') {
         value = JSON.stringify(value);
       }
-	  if (field.type === 'array' || Array.isArray(value)) {
+      if (field.type === 'array' || Array.isArray(value)) {
         // value = value.map((i) => field.arrayType === 'object' ? JSON.stringify(i) : i);
         if (!value) {
           value = [];
@@ -94,42 +94,45 @@ export class PutComponent implements OnInit  {
         } else {
           value = JSON.stringify(value, null, '\t');
         }
-      } else if(field.dataType ==='json' && value){		
-			value = JSON.stringify(value, null, '\t'); 		  
-	  }
+      } else if (field.dataType === 'json' && value) {
+        value = JSON.stringify(value, null, '\t');
+      } else if (field.dataPath === 'response' && value) {
+        const jsonValue = JSON.parse(value);
+        value = JSON.stringify(jsonValue, null, 4);
+      }
       const fieldName = field.dataPath ? `${field.dataPath}.${field.name}` : field.name;
       obj[fieldName] = new FormControl(value === undefined ? '' : value);
     }
-	
-	//Set URL and URLType values
-	if(this.dataPathUtils.getFieldValueInPath('url', 'request', this.rowData)){
-			obj['url']=new FormControl(this.dataPathUtils.getFieldValueInPath('url', 'request', this.rowData) || '');
-			obj['urlPattern']=new FormControl('url' || '');		
-	}else if(this.dataPathUtils.getFieldValueInPath('urlPath', 'request', this.rowData)){
-		obj['url']=new FormControl(this.dataPathUtils.getFieldValueInPath('urlPath', 'request', this.rowData) || '');
-		obj['urlPattern']=new FormControl('urlPath' || '');		
-	}else if(this.dataPathUtils.getFieldValueInPath('urlPattern', 'request', this.rowData)){
-		obj['url']=new FormControl(this.dataPathUtils.getFieldValueInPath('urlPattern', 'request', this.rowData) || '');
-		obj['urlPattern']=new FormControl('urlPattern' || '');		
-	}else if(this.dataPathUtils.getFieldValueInPath('urlPathPattern', 'request', this.rowData)){
-		obj['url']=new FormControl(this.dataPathUtils.getFieldValueInPath('urlPathPattern', 'request', this.rowData) || '');
-		obj['urlPattern']=new FormControl('urlPathPattern' || '');		
-	}
-	
-	let delay = this.dataPathUtils.getFieldValueInPath('fixedDelayMilliseconds', 'response', this.rowData);
-	
-	//Set DelayType
-	if(delay){
-		obj['response.delay']=new FormControl(delay || '');
-		obj['response.delayType']=new FormControl('fixedDelayMilliseconds' || '');	
-	}else{
-		obj['response.delayType']=new FormControl('NONE' || '');	
-	}
-	
-	//Set Fault
-	if(!this.dataPathUtils.getFieldValueInPath('fault', 'response', this.rowData)){
-		obj['response.fault']=new FormControl('NONE' || '');
-	}
+
+    //Set URL and URLType values
+    if (this.dataPathUtils.getFieldValueInPath('url', 'request', this.rowData)) {
+      obj['url'] = new FormControl(this.dataPathUtils.getFieldValueInPath('url', 'request', this.rowData) || '');
+      obj['urlPattern'] = new FormControl('url' || '');
+    } else if (this.dataPathUtils.getFieldValueInPath('urlPath', 'request', this.rowData)) {
+      obj['url'] = new FormControl(this.dataPathUtils.getFieldValueInPath('urlPath', 'request', this.rowData) || '');
+      obj['urlPattern'] = new FormControl('urlPath' || '');
+    } else if (this.dataPathUtils.getFieldValueInPath('urlPattern', 'request', this.rowData)) {
+      obj['url'] = new FormControl(this.dataPathUtils.getFieldValueInPath('urlPattern', 'request', this.rowData) || '');
+      obj['urlPattern'] = new FormControl('urlPattern' || '');
+    } else if (this.dataPathUtils.getFieldValueInPath('urlPathPattern', 'request', this.rowData)) {
+      obj['url'] = new FormControl(this.dataPathUtils.getFieldValueInPath('urlPathPattern', 'request', this.rowData) || '');
+      obj['urlPattern'] = new FormControl('urlPathPattern' || '');
+    }
+
+    let delay = this.dataPathUtils.getFieldValueInPath('fixedDelayMilliseconds', 'response', this.rowData);
+
+    //Set DelayType
+    if (delay) {
+      obj['response.delay'] = new FormControl(delay || '');
+      obj['response.delayType'] = new FormControl('fixedDelayMilliseconds' || '');
+    } else {
+      obj['response.delayType'] = new FormControl('NONE' || '');
+    }
+
+    //Set Fault
+    if (!this.dataPathUtils.getFieldValueInPath('fault', 'response', this.rowData)) {
+      obj['response.fault'] = new FormControl('NONE' || '');
+    }
     return obj;
   }
 
@@ -144,7 +147,7 @@ export class PutComponent implements OnInit  {
     }
     return `${field.dataPath}.${field.name}`;
   }
-  
+
   public submit(e: Event) {
     e.preventDefault();
     this.request(this.workingRowData);
@@ -220,9 +223,9 @@ export class PutComponent implements OnInit  {
   close(shouldRefresh = false) {
     this.visible = false;
     this.visibleChange.emit(this.visible);
-    this.stateChanged.emit({state: shouldRefresh ? 'afterChange' : null});
+    this.stateChanged.emit({ state: shouldRefresh ? 'afterChange' : null });
   }
-  
+
 
 
 }

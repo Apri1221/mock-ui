@@ -1,7 +1,7 @@
-import {Component, OnInit, Input, Inject, Output, EventEmitter} from '@angular/core';
-import {FormGroup, FormControl, FormBuilder, FormArray} from '@angular/forms';
-import {DataPathUtils} from '../../../utils/dataPath.utils';
-import {MultipartFormUtils} from '../../../utils/multipartForm.utils';
+import { Component, OnInit, Input, Inject, Output, EventEmitter } from '@angular/core';
+import { FormGroup, FormControl, FormBuilder, FormArray } from '@angular/forms';
+import { DataPathUtils } from '../../../utils/dataPath.utils';
+import { MultipartFormUtils } from '../../../utils/multipartForm.utils';
 import { ToastrService } from 'ngx-toastr';
 import { trigger, state, style, animate, transition } from '@angular/animations';
 import { RequestHeaders } from '../../../services/config.model';
@@ -46,10 +46,10 @@ export class PostComponent implements OnInit {
   workingRowData: any;
 
   constructor(@Inject('RequestsService') private requestsService,
-              @Inject('DataPathUtils') private dataPathUtils,
-              @Inject('MultipartFormUtils') private multipartFormUtils,
-              private _fb: FormBuilder,
-              private toastrService: ToastrService) { }
+    @Inject('DataPathUtils') private dataPathUtils,
+    @Inject('MultipartFormUtils') private multipartFormUtils,
+    private _fb: FormBuilder,
+    private toastrService: ToastrService) { }
 
   ngOnInit() {
     this.initForm();
@@ -80,9 +80,9 @@ export class PostComponent implements OnInit {
     for (const field of fields) {
       const fieldName = field.dataPath ? `${field.dataPath}.${field.name}` : field.name;
       let value = field.default === undefined ? '' : field.default;
-	  if (field.type === 'array') {	
-		value = JSON.stringify(value || []);
-     }
+      if (field.type === 'array') {
+        value = JSON.stringify(value || []);
+      }
       obj[fieldName] = [value];
     }
     return obj;
@@ -92,7 +92,7 @@ export class PostComponent implements OnInit {
     const fields = this.buildFields();
     this.workingRowData = this.dataPathUtils.extractModelFromFields(fields);
   }
-  
+
   public getFieldName(field) {
     if (!field.dataPath) {
       return field.name;
@@ -148,7 +148,7 @@ export class PostComponent implements OnInit {
       const paramArr = param.split('.');
       const dataPath = paramArr.slice(0, -1).join('.');
       var value = this.myForm.controls[param].value;
-      if (typeof value === 'string' && value.length ===0) {
+      if (typeof value === 'string' && value.length === 0) {
         value = null;
       }
       fields.push({
@@ -163,7 +163,7 @@ export class PostComponent implements OnInit {
   close(shouldRefresh = false) {
     this.visible = false;
     this.visibleChange.emit(this.visible);
-    this.stateChanged.emit({state: shouldRefresh ? 'afterChange' : null});
+    this.stateChanged.emit({ state: shouldRefresh ? 'afterChange' : null });
   }
 
 }

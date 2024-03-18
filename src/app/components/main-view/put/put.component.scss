@@ -1,3 +1,27 @@
 @import "../../../../styles/vars";
 @import "../../../../../node_modules/purecss/build/pure-min.css";
 @import "../../../../../node_modules/purecss/build/grids-responsive-min.css";
+
+.code-editor {
+    font-family: Menlo, "Cascadia Code", Consolas, "Liberation Mono", monospace;
+    font-size: 14px;
+    padding: 10px;
+    line-height: 1.5;
+    resize: vertical;
+    background-color: #f5f5f5;
+    color: #1e1e1e;
+}
+
+.code-editor:focus {
+    outline: none;
+    border-color: #007bff;
+    box-shadow: 0px 11px 32px -3px rgba(0,0,0,0.1);
+}
+
+.code-editor::placeholder {
+    color: #807e7e; /* Placeholder text color */
+}
+
+.pure-button.button-xlarge {
+    font-size: 125%;
+}
