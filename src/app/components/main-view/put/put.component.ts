@@ -84,13 +84,17 @@ export class PutComponent implements OnInit  {
       if (field.type === 'object') {
         value = JSON.stringify(value);
       }
-	  if (field.type === 'array') {
+	  if (field.type === 'array' || Array.isArray(value)) {
         // value = value.map((i) => field.arrayType === 'object' ? JSON.stringify(i) : i);
         if (!value) {
           value = [];
         }
-        value = JSON.stringify(value, null, '\t');
-      }else if(field.dataType ==='json' && value){		
+        if (field.type !== 'array' && Array.isArray(value)) {
+          value = JSON.stringify(value)
+        } else {
+          value = JSON.stringify(value, null, '\t');
+        }
+      } else if(field.dataType ==='json' && value){		
 			value = JSON.stringify(value, null, '\t'); 		  
 	  }
       const fieldName = field.dataPath ? `${field.dataPath}.${field.name}` : field.name;

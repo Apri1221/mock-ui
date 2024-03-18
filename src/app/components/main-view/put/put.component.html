@@ -14,12 +14,12 @@
               <input type="text" placeholder="{{field.label}}" [formControlName]="getFieldName(field)" style="height: 100%;width:50%"/>
             </ng-template>
 			<ng-template [ngSwitchCase]="'select'">
-			<label>{{field.label || field.name}}</label>
-              <select [formControlName]="getFieldName(field)" style="height: 100%;width:50%">
-				<option *ngFor="let option of field.options" value="{{option.value}}" ng-if="foo">{{option.displayText}}</option>							  
+        <label>{{field.label || field.name}}</label>
+                <select [formControlName]="getFieldName(field)" style="height: 100%;width:50%">
+        <option *ngFor="let option of field.options" value="{{option.value}}" ng-if="foo">{{option.displayText}}</option>							  
 			  </select>
             </ng-template>
-			<ng-template [ngSwitchCase]="'hr'">
+			      <ng-template [ngSwitchCase]="'hr'">
               <hr>          
             </ng-template>
             <ng-template [ngSwitchCase]="'textarea'">
