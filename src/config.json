@@ -77,7 +77,9 @@
             {
               "name": "name",
               "label": "Stub Name",
-              "type": "text"
+              "type": "text",
+              "isShowIconDetail":true,
+              "url_detail":"https://wiremock.org/docs/overview/"
             },
             {
               "name": "urlPattern",
@@ -129,7 +131,9 @@
             {
               "name": "url",
               "label": "URL",
-              "type": "text"
+              "type": "text",
+              "isShowIconDetail":false,
+              "url_detail":"https://wiremock.org/docs/overview/"
             },
             {
               "name": "queryParameters",
@@ -313,12 +317,16 @@
             {
               "name": "name",
               "label": "Stub Name",
-              "type": "text"
+              "type": "text",
+              "isShowIconDetail":true,
+              "url_detail":"https://wiremock.org/docs/overview/"
             },
             {
               "name": "urlPattern",
               "label": "URL Pattern",
               "type": "select",
+              "isShowIconDetail":true,
+              "url_detail":"https://wiremock.org/docs/overview/",
               "options": [
                 {
                   "displayText": "Path and query",

@@ -61,6 +61,10 @@ export class PutComponent implements OnInit  {
     this.initForm();
   }
 
+  public handleIconClick(url: string) {
+    window.open(url, '_blank');
+  }
+
   private initForm() {
     try {
       this.methodData = this.pageData.methods.put;

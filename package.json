@@ -4,7 +4,7 @@
   "license": "ISC",
   "angular-cli": {},
   "scripts": {
-    "start": "ng serve",
+    "start": "set NODE_OPTIONS=--openssl-legacy-provider && ng serve",
     "lint": "tslint \"src/**/*.ts\"",
     "test": "ng test",
     "pree2e": "webdriver-manager update",
