@@ -329,19 +329,19 @@
               "url_detail":"https://wiremock.org/docs/overview/",
               "options": [
                 {
-                  "displayText": "Path and query",
+                  "displayText": "Path and query [url]",
                   "value": "url"
                 },
                 {
-                  "displayText": "Path and query regex",
+                  "displayText": "Path and query regex [urlPattern]",
                   "value": "urlPattern"
                 },
                 {
-                  "displayText": "urlPathEqualTo",
+                  "displayText": "urlPathEqualTo [urlPath]",
                   "value": "urlPath"
                 },
                 {
-                  "displayText": "Path regex",
+                  "displayText": "Path regex [urlPathPattern]",
                   "value": "urlPathPattern"
                 }
               ]

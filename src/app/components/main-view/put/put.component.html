@@ -14,7 +14,8 @@
               <div style="display: flex; align-items: center;">
                 <label>{{field.label || field.name}}</label>
                 <input type="text" placeholder="{{field.label}}" [formControlName]="getFieldName(field)"
-                  style="height: 100%; width: 50%;" />
+                 
+                style="height: 100%; width: 50%;"  />
                 <i *ngIf="field.isShowIconDetail" class="fa fa-info-circle" aria-hidden="true"
                   (click)="handleIconClick(field.url_detail)"
                   style="margin-left: 20px; font-size: 150%; align-self: center; color: blue;"></i>
@@ -35,7 +36,8 @@
             </ng-template>
             <ng-template [ngSwitchCase]="'textarea'">
               <label>{{field.label || field.name}}</label>
-              <textarea rows="10" cols="50" [formControlName]="getFieldName(field)" placeholder="{{field.placeholder}}"
+              <textarea class="code-editor" rows="10" cols="50" [formControlName]="getFieldName(field)"
+                placeholder="{{field.placeholder}}"
                 style="height: 100%;width:50%"></textarea>
               <i *ngIf="field.isShowIconDetail" class="fa fa-info-circle" aria-hidden="true"
                 (click)="handleIconClick(field.url_detail)"
@@ -66,8 +68,9 @@
                 style="margin-left: 20px; font-size: 150%; align-self: center; color: blue;"></i>
             </div>
           </div>
+          <hr>
           <div class="center">
-            <button type="submit" class="pure-button pure-button-primary button-large"
+            <button type="submit" class="pure-button pure-button-primary button-xlarge"
               [disabled]="myForm.invalid">Submit</button>
           </div>
           <app-loader [size]="'small'" [loading]="loading"></app-loader>
