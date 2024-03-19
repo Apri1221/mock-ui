@@ -71,6 +71,9 @@ export class PostComponent implements OnInit {
     this.myForm.valueChanges.subscribe(() => this.updateWorkingRowData());
     this.updateWorkingRowData();
   }
+  public handleIconClick(url: string) {
+    window.open(url, '_blank');
+  }
 
   private buildFormFields(fields = []) {
     const obj = {};

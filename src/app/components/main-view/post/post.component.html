@@ -14,6 +14,9 @@
               <label>{{field.label || field.name}}</label>
               <input type="text" placeholder="{{field.label}}" [formControlName]="getFieldName(field)"
                 style="height: 100%;width:50%" />
+              <i *ngIf="field.isShowIconDetail" class="fa fa-info-circle" aria-hidden="true"
+                (click)="handleIconClick(field.url_detail)"
+                style="margin-left: 20px; font-size: 150%; align-self: center; color: blue;"></i>
             </ng-template>
             <ng-template [ngSwitchCase]="'select'">
               <label>{{field.label || field.name}}</label>
@@ -21,6 +24,9 @@
                 <option *ngFor="let option of field.options" value="{{option.value}}" ng-if="foo">{{option.displayText}}
                 </option>
               </select>
+              <i *ngIf="field.isShowIconDetail" class="fa fa-info-circle" aria-hidden="true"
+                (click)="handleIconClick(field.url_detail)"
+                style="margin-left: 20px; font-size: 150%; align-self: center; color: blue;"></i>
             </ng-template>
             <ng-template [ngSwitchCase]="'hr'">
               <hr>
@@ -28,7 +34,11 @@
             <ng-template [ngSwitchCase]="'textarea'">
               <label>{{field.label || field.name}}</label>
               <textarea class="code-editor" rows="10" cols="50" [formControlName]="getFieldName(field)"
-                placeholder="{{field.placeholder}}" style="height: 100%;width:50%"></textarea>
+                placeholder="{{field.placeholder}}"
+                style="height: 100%;width:50%"></textarea>
+              <i *ngIf="field.isShowIconDetail" class="fa fa-info-circle" aria-hidden="true"
+                (click)="handleIconClick(field.url_detail)"
+                style="margin-left: 20px; font-size: 150%; align-self: center; color: blue;"></i>
             </ng-template>
             <ng-template [ngSwitchCase]="'email'">
               <label>{{field.label || field.name}}</label>
@@ -56,6 +66,7 @@
       </form>
     </div>
     <button *ngIf="closable" (click)="close()" aria-label="Close" class="dialog__close-btn"><i
+       
         class="fa fa-times"></i></button>
   </div>
 </div>
