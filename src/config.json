@@ -85,6 +85,8 @@
               "name": "urlPattern",
               "label": "URL Pattern",
               "type": "select",
+              "isShowIconDetail":true,
+              "url_detail":"https://wiremock.org/docs/request-matching/",
               "options": [
                 {
                   "displayText": "Path and query [url]",
@@ -132,7 +134,7 @@
               "name": "url",
               "label": "URL",
               "type": "text",
-              "isShowIconDetail":false,
+              "isShowIconDetail":true,
               "url_detail":"https://wiremock.org/docs/overview/"
             },
             {
@@ -236,6 +238,8 @@
               "type": "select",
               "dataPath": "response",
               "dataType": "json",
+              "isShowIconDetail":true,
+              "url_detail":"https://wiremock.org/docs/extensibility/transforming-responses/",
               "options": [
                 {
                   "displayText": "None",
@@ -317,16 +321,14 @@
             {
               "name": "name",
               "label": "Stub Name",
-              "type": "text",
-              "isShowIconDetail":true,
-              "url_detail":"https://wiremock.org/docs/overview/"
+              "type": "text"
             },
             {
               "name": "urlPattern",
               "label": "URL Pattern",
               "type": "select",
               "isShowIconDetail":true,
-              "url_detail":"https://wiremock.org/docs/overview/",
+              "url_detail":"https://wiremock.org/docs/request-matching/",
               "options": [
                 {
                   "displayText": "Path and query [url]",
@@ -476,6 +478,8 @@
               "type": "select",
               "dataPath": "response",
               "dataType": "json",
+              "isShowIconDetail":true,
+              "url_detail":"https://wiremock.org/docs/extensibility/transforming-responses/",
               "options": [
                 {
                   "displayText": "None",
