@@ -78,7 +78,7 @@
               "name": "name",
               "label": "Stub Name",
               "type": "text",
-              "isShowIconDetail":true,
+              "isShowIconDetail":false,
               "url_detail":"https://wiremock.org/docs/overview/"
             },
             {
@@ -134,7 +134,7 @@
               "name": "url",
               "label": "URL",
               "type": "text",
-              "isShowIconDetail":true,
+              "isShowIconDetail":false,
               "url_detail":"https://wiremock.org/docs/overview/"
             },
             {
