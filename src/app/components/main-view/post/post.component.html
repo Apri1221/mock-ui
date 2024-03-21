@@ -59,15 +59,13 @@
           <hr>
           <div class="center">
             <button type="submit" class="pure-button pure-button-primary button-xlarge"
-              [disabled]="myForm.invalid">Submit</button>
+              [disabled]="myForm.invalid">Submit post</button>
           </div>
           <app-loader [size]="'small'" [loading]="loading"></app-loader>
         </fieldset>
       </form>
     </div>
-    <button *ngIf="closable" (click)="close()" aria-label="Close" class="dialog__close-btn"><i
-       
-        class="fa fa-times"></i></button>
+    <button *ngIf="closable" (click)="close()" aria-label="Close" class="dialog__close-btn"><i class="fa fa-times"></i></button>
   </div>
 </div>
 

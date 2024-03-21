@@ -218,6 +218,13 @@
               "dataPath": "response"
             },
             {
+              "name": "metadata",
+              "label": "Jumlah Looping",
+              "type": "text",
+              "isShowIconDetail":true,
+              "url_detail":"https://wiremock.org/docs/overview/"
+            },
+            {
               "name": "body",
               "label": "Response",
               "type": "textarea",
@@ -456,6 +463,13 @@
               "label": "Delay (ms)",
               "type": "text",
               "dataPath": "response"
+            },
+            {
+              "name": "metadata",
+              "label": "Jumlah Looping",
+              "type": "text",
+              "isShowIconDetail":true,
+              "url_detail":"https://wiremock.org/docs/overview/"
             },
             {
               "name": "body",

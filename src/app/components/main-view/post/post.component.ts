@@ -45,6 +45,7 @@ export class PostComponent implements OnInit {
 
   workingRowData: any;
 
+
   constructor(@Inject('RequestsService') private requestsService,
     @Inject('DataPathUtils') private dataPathUtils,
     @Inject('MultipartFormUtils') private multipartFormUtils,
@@ -112,6 +113,7 @@ export class PostComponent implements OnInit {
     return this.methodData.requestHeaders || this.pageData.requestHeaders || {};
   }
 
+  total_looping: number;
   private request(data = {}) {
     this.loading = true;
 
@@ -130,8 +132,29 @@ export class PostComponent implements OnInit {
     }
 
     this.fields.map((field) => {
+      console.log(field.label)
       if (field.type === 'object' || field.type === 'json') {
         data[field.name] = JSON.parse(data[field.name]);
+      }
+      else if (field.name === 'metadata') {
+        this.total_looping = JSON.parse(data[field.name]);
+        const jsonString = `{"total_looping": "${this.total_looping}"}`;
+        data[field.name] = JSON.parse(jsonString);
+      } else if (field.label === 'Response') {
+        if(this.total_looping != null && this.total_looping>0){
+          let jsonValue =data['response']['body'];
+          let valuesArray= [];
+          const numberOfElements = this.total_looping ;
+          for (let i = 0; i < numberOfElements; i++) {
+            try {
+              let jsonObject = JSON.parse(jsonValue);
+              valuesArray.push(jsonObject);
+            } catch (error) {
+              valuesArray.push(jsonValue);
+            }
+          }
+          data['response']['body'] = JSON.stringify(valuesArray);
+        }
       }
     });
 
