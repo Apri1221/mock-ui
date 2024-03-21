@@ -218,6 +218,11 @@
               "dataPath": "response"
             },
             {
+              "name": "metadata",
+              "label": "Jumlah Looping",
+              "type": "text"
+            },
+            {
               "name": "body",
               "label": "Response",
               "type": "textarea",
@@ -456,6 +461,11 @@
               "label": "Delay (ms)",
               "type": "text",
               "dataPath": "response"
+            },
+            {
+              "name": "metadata",
+              "label": "Jumlah Looping",
+              "type": "text"
             },
             {
               "name": "body",

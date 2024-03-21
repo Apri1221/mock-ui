@@ -46,6 +46,8 @@ export class PutComponent implements OnInit {
 
   workingRowData: any;
 
+  total_looping: number;
+
   constructor(@Inject('RequestsService') private requestsService,
     @Inject('DataPathUtils') private dataPathUtils,
     @Inject('MultipartFormUtils') private multipartFormUtils,
@@ -98,11 +100,31 @@ export class PutComponent implements OnInit {
         } else {
           value = JSON.stringify(value, null, '\t');
         }
-      } else if (field.dataType === 'json' && value) {
+      } else if (field.dataType === 'value' && value) {
         value = JSON.stringify(value, null, '\t');
       } else if (field.dataPath === 'response' && value) {
-        const jsonValue = JSON.parse(value);
-        value = JSON.stringify(jsonValue, null, 4);
+        let jsonValue = value;
+        try {
+          jsonValue = JSON.parse(value);
+          const isarray = Array.isArray(jsonValue);
+          if (isarray) {
+            const isAllSame = jsonValue.every((item: any) => JSON.stringify(item) === JSON.stringify(jsonValue[0]));
+            if (isAllSame) {
+              jsonValue = jsonValue[0];
+            }
+          }
+          value = JSON.stringify(jsonValue, null, 4);
+        } catch (e) {
+          console.error('notif-->' + e)
+          value = jsonValue;
+        }
+      }else if (field.name === 'metadata') {
+        try {
+          value = value['total_looping'];
+        }catch(e){
+          value=0
+          console.error('errorParsingMetadata-->' + e)
+        }
       }
       const fieldName = field.dataPath ? `${field.dataPath}.${field.name}` : field.name;
       obj[fieldName] = new FormControl(value === undefined ? '' : value);
@@ -193,6 +215,29 @@ export class PutComponent implements OnInit {
     this.fields.map((field) => {
       if (field.type === 'object' || field.type === 'json') {
         data[field.name] = JSON.parse(data[field.name]);
+      }
+      else if (field.name === 'metadata') {
+        try {
+        this.total_looping = JSON.parse(data[field.name]);
+        const jsonString = `{"total_looping": "${this.total_looping}"}`;
+        data[field.name] = JSON.parse(jsonString);}catch(error){
+          console.log("errror")
+        }
+      } else if (field.label === 'Response') {
+        if(this.total_looping != null && this.total_looping>0){
+          let jsonValue =data['response']['body'];
+          let valuesArray= [];
+          const numberOfElements = this.total_looping ;
+          for (let i = 0; i < numberOfElements; i++) {
+            try {
+              let jsonObject = JSON.parse(jsonValue);
+              valuesArray.push(jsonObject);
+            } catch (error) {
+              valuesArray.push(jsonValue);
+            }
+          }
+          data['response']['body'] = JSON.stringify(valuesArray);
+        }
       }
     });
 
