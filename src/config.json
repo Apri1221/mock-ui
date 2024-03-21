@@ -221,7 +221,7 @@
               "name": "metadata",
               "label": "Jumlah Looping",
               "type": "text",
-              "isShowIconDetail":true,
+              "isShowIconDetail":false,
               "url_detail":"https://wiremock.org/docs/overview/"
             },
             {
@@ -468,7 +468,7 @@
               "name": "metadata",
               "label": "Jumlah Looping",
               "type": "text",
-              "isShowIconDetail":true,
+              "isShowIconDetail":false,
               "url_detail":"https://wiremock.org/docs/overview/"
             },
             {
