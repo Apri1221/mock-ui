@@ -220,9 +220,7 @@
             {
               "name": "metadata",
               "label": "Jumlah Looping",
-              "type": "text",
-              "isShowIconDetail":false,
-              "url_detail":"https://wiremock.org/docs/overview/"
+              "type": "text"
             },
             {
               "name": "body",
@@ -467,9 +465,7 @@
             {
               "name": "metadata",
               "label": "Jumlah Looping",
-              "type": "text",
-              "isShowIconDetail":false,
-              "url_detail":"https://wiremock.org/docs/overview/"
+              "type": "text"
             },
             {
               "name": "body",
