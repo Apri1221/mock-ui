@@ -134,6 +134,28 @@ export class PutComponent implements OnInit {
           value = 0
           console.error('errorParsingMetadata-->' + e)
         }
+        let jsonValue = value;
+        try {
+          jsonValue = JSON.parse(value);
+          const isarray = Array.isArray(jsonValue);
+          if (isarray) {
+            const isAllSame = jsonValue.every((item: any) => JSON.stringify(item) === JSON.stringify(jsonValue[0]));
+            if (isAllSame) {
+              jsonValue = jsonValue[0];
+            }
+          }
+          value = JSON.stringify(jsonValue, null, 4);
+        } catch (e) {
+          console.error('notif-->' + e)
+          value = jsonValue;
+        }
+      } else if (field.name === 'metadata') {
+        try {
+          value = value['total_looping'];
+        } catch (e) {
+          value = 0
+          console.error('errorParsingMetadata-->' + e)
+        }
       }
       const fieldName = field.dataPath ? `${field.dataPath}.${field.name}` : field.name;
       obj[fieldName] = new FormControl(value === undefined ? '' : value);
